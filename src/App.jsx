@@ -12,7 +12,7 @@ function App() {
         <main className="flex-1 flex flex-col items-center justify-start w-full">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/map" element={<MainPage />} />
+            <Route path="/calculation" element={<MainPage />} />
           </Routes>
         </main>
       </div>

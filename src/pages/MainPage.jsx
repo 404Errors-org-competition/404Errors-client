@@ -1,14 +1,7 @@
-import React, { useState } from "react";
-import InfoCard from "../components/InfoCard";
-import MapComponent from "../components/MapComponent";
+import React from "react";
 
 const MainPage = () => {
-  return (
-    <div className="flex-1 flex flex-col items-center justify-start w-full">
-      <InfoCard>Інформація про проєкт: тут буде короткий опис або інструкція для користувача.</InfoCard>
-      <MapComponent />
-    </div>
-  );
+  return <div className="flex-1 flex flex-col items-center justify-start w-full"></div>;
 };
 
 export default MainPage;
