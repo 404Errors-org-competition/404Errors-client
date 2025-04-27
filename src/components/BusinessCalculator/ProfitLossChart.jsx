@@ -63,7 +63,7 @@ const ProfitLossChart = ({ region }) => {
                 showAlways: true,
                 label: "Втрати",
                 formatter: function (w) {
-                  return region.alertsPercentage + "%";
+                  return "~" + region.alertsPercentage + "%";
                 },
               },
               value: {

@@ -32,7 +32,7 @@ const RegionStats = ({ region, animating }) => {
         <div className="flex flex-col p-2 rounded-md bg-white border border-gray-100">
           <div className="text-gray-600 text-sm">Чистий заробіток за місяць:</div>
           {region.monthlyEarnings ? (
-            <div className="font-semibold text-lg text-emerald-600">{region.monthlyEarnings}$</div>
+            <div className="font-semibold text-lg text-emerald-600">~{region.monthlyEarnings}$</div>
           ) : (
             <div className="flex items-center h-8 animate-pulse">
               <div className="h-4 bg-gray-200 rounded w-24"></div>
@@ -43,7 +43,7 @@ const RegionStats = ({ region, animating }) => {
         <div className="flex flex-col p-2 rounded-md bg-white border border-gray-100">
           <div className="text-gray-600 text-sm">Втрачена сума через тривоги:</div>
           {region.lostDueToAlerts ? (
-            <div className="font-semibold text-lg text-red-500">{region.lostDueToAlerts}$</div>
+            <div className="font-semibold text-lg text-red-500">~{region.lostDueToAlerts}$</div>
           ) : (
             <div className="flex items-center h-8 animate-pulse">
               <div className="h-4 bg-gray-200 rounded w-24"></div>
