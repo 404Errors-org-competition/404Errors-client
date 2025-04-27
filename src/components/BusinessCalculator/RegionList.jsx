@@ -22,6 +22,24 @@ const RegionList = ({
     setExpandedRegionId(null);
   };
 
+  const getRegionCategoryName = (category) => {
+    const categories = {
+      west: "Західна Україна",
+      central: "Центральна Україна",
+      east: "Східна Україна",
+    };
+    return categories[category] || "Інший регіон";
+  };
+
+  const getRegionCategoryColor = (category) => {
+    const colors = {
+      west: "bg-blue-100 text-blue-800",
+      central: "bg-yellow-100 text-yellow-800",
+      east: "bg-red-100 text-red-800",
+    };
+    return colors[category] || "bg-gray-100 text-gray-800";
+  };
+
   const filteredRegions = regions;
 
   return (
@@ -68,7 +86,18 @@ const RegionList = ({
                     >
                       {displayNumber}
                     </div>
-                    <span className="font-medium">{region.name}</span>
+                    <div className="flex flex-col">
+                      <span className="font-medium">{region.name}</span>
+                      {region.regionCategory && (
+                        <span
+                          className={`text-xs px-2 py-0.5 rounded-full mt-1 inline-block ${getRegionCategoryColor(
+                            region.regionCategory
+                          )}`}
+                        >
+                          {getRegionCategoryName(region.regionCategory)}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {isSelectedForComparison && (

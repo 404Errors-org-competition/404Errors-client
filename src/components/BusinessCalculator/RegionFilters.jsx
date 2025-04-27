@@ -1,21 +1,19 @@
 import React from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const RegionFilters = ({ onFilterChange, onSortChange }) => {
+const RegionFilters = ({ onFilterChange, onSortChange, onCompareSelected, selectedRegions }) => {
   const sortOptions = [
     { value: "paybackAsc", label: "За окупністю (зростання)" },
     { value: "paybackDesc", label: "За окупністю (спадання)" },
-    { value: "alertsAsc", label: "За % втрат (зростання)" },
-    { value: "alertsDesc", label: "За % втрат (спадання)" },
     { value: "earningsAsc", label: "За доходом (зростання)" },
     { value: "earningsDesc", label: "За доходом (спадання)" },
   ];
 
   const filters = [
     { value: "all", label: "Всі регіони" },
-    { value: "lowRisk", label: "Низький ризик (до 25%)" },
-    { value: "mediumRisk", label: "Середній ризик (25-35%)" },
-    { value: "highRisk", label: "Високий ризик (понад 35%)" },
+    { value: "west", label: "Західна Україна" },
+    { value: "central", label: "Центральна Україна" },
+    { value: "east", label: "Східна Україна" },
   ];
 
   return (
@@ -25,12 +23,12 @@ const RegionFilters = ({ onFilterChange, onSortChange }) => {
         <p className="font-medium mb-1">Як користуватись фільтрами:</p>
         <ul className="list-disc pl-5 space-y-1">
           <li>
-            <span className="font-medium">Фільтр регіонів</span> - дозволяє обрати області за рівнем ризику на основі
-            відсотка втрат через повітряні тривоги
+            <span className="font-medium">Фільтр регіонів</span> - дозволяє обрати області за географічним розташуванням
+            (Західна, Центральна, Східна Україна)
           </li>
           <li>
             <span className="font-medium">Сортування</span> - змінює порядок відображення областей за обраним критерієм
-            (окупність, втрати, дохід)
+            (окупність, дохід)
           </li>
         </ul>
       </div>
@@ -40,7 +38,7 @@ const RegionFilters = ({ onFilterChange, onSortChange }) => {
           <label className="block text-sm text-gray-600 mb-1">Фільтр регіонів</label>
           <Select onValueChange={onFilterChange} defaultValue="all">
             <SelectTrigger className="w-full border border-gray-300">
-              <SelectValue placeholder="Виберіть фільтр" />
+              <SelectValue placeholder="Виберіть регіон" />
             </SelectTrigger>
             <SelectContent>
               {filters.map((filter) => (
@@ -50,7 +48,7 @@ const RegionFilters = ({ onFilterChange, onSortChange }) => {
               ))}
             </SelectContent>
           </Select>
-          <p className="text-xs text-gray-500 mt-1">Оберіть області за рівнем втрат від повітряних тривог</p>
+          <p className="text-xs text-gray-500 mt-1">Оберіть області за географічним розташуванням</p>
         </div>
 
         <div className="flex-grow min-w-[250px] sm:min-w-0">

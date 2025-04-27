@@ -7,31 +7,37 @@ import RegionComparison from "@/components/BusinessCalculator/RegionComparison";
 import RegionFilters from "@/components/BusinessCalculator/RegionFilters";
 
 const regionsData = [
-  { id: 1, name: "Донецька область", alertsPercentage: 45 },
-  { id: 2, name: "Луганська область", alertsPercentage: 42 },
-  { id: 3, name: "Дніпропетровська область", alertsPercentage: 12 },
-  { id: 4, name: "Запорізька область", alertsPercentage: 12 },
-  { id: 5, name: "Волинська область", alertsPercentage: 11 },
-  { id: 6, name: "Київська область", alertsPercentage: 10 },
-  { id: 7, name: "Вінницька область", alertsPercentage: 9 },
-  { id: 8, name: "Одеська область", alertsPercentage: 30 },
-  { id: 9, name: "Рівненська область", alertsPercentage: 10 },
-  { id: 10, name: "Сумська область", alertsPercentage: 36 },
-  { id: 11, name: "Тернопільська область", alertsPercentage: 9 },
-  { id: 12, name: "Хмельницька область", alertsPercentage: 19 },
-  { id: 13, name: "Черкаська область", alertsPercentage: 9 },
-  { id: 14, name: "Чернівецька область", alertsPercentage: 9 },
-  { id: 15, name: "Чернігівська область", alertsPercentage: 9 },
-  { id: 16, name: "Івано-Франківська область", alertsPercentage: 8 },
-  { id: 17, name: "Миколаївська область", alertsPercentage: 8 },
-  { id: 18, name: "Львівська область", alertsPercentage: 7 },
-  { id: 19, name: "Житомирська область", alertsPercentage: 6 },
-  { id: 20, name: "Закарпатська область", alertsPercentage: 6 },
-  { id: 21, name: "Кіровоградська область", alertsPercentage: 14 },
-  { id: 22, name: "Полтавська область", alertsPercentage: 18 },
-  { id: 23, name: "Крим", alertsPercentage: 45 },
-  { id: 24, name: "Севастополь", alertsPercentage: 45 },
+  { id: 1, name: "Донецька область", alertsPercentage: 45, regionCategory: "east" },
+  { id: 2, name: "Луганська область", alertsPercentage: 42, regionCategory: "east" },
+  { id: 3, name: "Дніпропетровська область", alertsPercentage: 12, regionCategory: "east" },
+  { id: 4, name: "Запорізька область", alertsPercentage: 12, regionCategory: "east" },
+  { id: 5, name: "Волинська область", alertsPercentage: 11, regionCategory: "west" },
+  { id: 6, name: "Київська область", alertsPercentage: 10, regionCategory: "central" },
+  { id: 7, name: "Вінницька область", alertsPercentage: 9, regionCategory: "central" },
+  { id: 8, name: "Одеська область", alertsPercentage: 30, regionCategory: "central" },
+  { id: 9, name: "Рівненська область", alertsPercentage: 10, regionCategory: "west" },
+  { id: 10, name: "Сумська область", alertsPercentage: 36, regionCategory: "east" },
+  { id: 11, name: "Тернопільська область", alertsPercentage: 9, regionCategory: "west" },
+  { id: 12, name: "Хмельницька область", alertsPercentage: 19, regionCategory: "west" },
+  { id: 13, name: "Черкаська область", alertsPercentage: 9, regionCategory: "central" },
+  { id: 14, name: "Чернівецька область", alertsPercentage: 9, regionCategory: "west" },
+  { id: 15, name: "Чернігівська область", alertsPercentage: 9, regionCategory: "central" },
+  { id: 16, name: "Івано-Франківська область", alertsPercentage: 8, regionCategory: "west" },
+  { id: 17, name: "Миколаївська область", alertsPercentage: 8, regionCategory: "central" },
+  { id: 18, name: "Львівська область", alertsPercentage: 7, regionCategory: "west" },
+  { id: 19, name: "Житомирська область", alertsPercentage: 6, regionCategory: "central" },
+  { id: 20, name: "Закарпатська область", alertsPercentage: 6, regionCategory: "west" },
+  { id: 21, name: "Кіровоградська область", alertsPercentage: 14, regionCategory: "central" },
+  { id: 22, name: "Полтавська область", alertsPercentage: 18, regionCategory: "central" },
+  { id: 23, name: "Крим", alertsPercentage: 45, regionCategory: "east" },
+  { id: 24, name: "Севастополь", alertsPercentage: 45, regionCategory: "east" },
 ];
+
+const regionCategoryNames = {
+  west: "Західна Україна",
+  central: "Центральна Україна",
+  east: "Східна Україна",
+};
 
 const regionNameMap = {
   Donetsk: "Донецька область",
@@ -104,6 +110,8 @@ const MainPage = () => {
           ? Math.round((apiRegion.lostAmountDueToAlerts / totalIncome) * 100)
           : baseRegion.alertsPercentage;
 
+      const regionCategory = baseRegion.regionCategory;
+
       return {
         id: baseRegion.id,
         name: baseRegion.name,
@@ -111,13 +119,21 @@ const MainPage = () => {
         lostDueToAlerts: Math.round(apiRegion.lostAmountDueToAlerts),
         paybackPeriodMonths: apiRegion.paybackPeriodMonths || null,
         alertsPercentage: alertsPercentage,
+        regionCategory: regionCategory,
       };
     });
 
-    const firstViableRegion = updatedRegions.find((r) => r.monthlyEarnings > 0) || updatedRegions[0];
+    const regionGroups = {
+      west: updatedRegions.filter((r) => r.regionCategory === "west"),
+      central: updatedRegions.filter((r) => r.regionCategory === "central"),
+      east: updatedRegions.filter((r) => r.regionCategory === "east"),
+    };
+
+    console.log("Згруповані дані за регіонами:", regionGroups);
+
+    setSelectedRegion(null);
 
     setAllRegions(updatedRegions);
-    setSelectedRegion(firstViableRegion);
     setFilteredRegions(applyFiltersAndSort(updatedRegions, filter, sortBy));
     setCalculationComplete(true);
   }, [calculationData, filter, sortBy]);
@@ -127,19 +143,15 @@ const MainPage = () => {
 
     result = result.filter((r) => r.monthlyEarnings !== null && r.monthlyEarnings >= 0);
 
-    if (filter === "lowRisk") {
-      result = result.filter((r) => r.alertsPercentage < 25); // Виправлено з < 10 на < 25
-    } else if (filter === "mediumRisk") {
-      result = result.filter((r) => r.alertsPercentage >= 25 && r.alertsPercentage <= 35);
-    } else if (filter === "highRisk") {
-      result = result.filter((r) => r.alertsPercentage > 35);
+    if (filter === "west") {
+      result = result.filter((r) => r.regionCategory === "west");
+    } else if (filter === "central") {
+      result = result.filter((r) => r.regionCategory === "central");
+    } else if (filter === "east") {
+      result = result.filter((r) => r.regionCategory === "east");
     }
 
-    if (sortBy === "alertsAsc") {
-      result.sort((a, b) => a.alertsPercentage - b.alertsPercentage);
-    } else if (sortBy === "alertsDesc") {
-      result.sort((a, b) => b.alertsPercentage - a.alertsPercentage);
-    } else if (sortBy === "earningsAsc") {
+    if (filter === "earningsAsc") {
       result.sort((a, b) => a.monthlyEarnings - b.monthlyEarnings);
     } else if (sortBy === "earningsDesc") {
       result.sort((a, b) => b.monthlyEarnings - a.monthlyEarnings);
