@@ -3,8 +3,9 @@ import React from "react";
 const RegionStats = ({ region, animating }) => {
   return (
     <div
-      className={`flex-1 border border-gray-300 rounded-md p-5 transition-all duration-500 shadow-sm bg-gray-50
-        ${animating ? "opacity-0 scale-95" : "opacity-100 scale-100"} flex flex-col items-center lg:items-stretch`}
+      className={`flex-1 border border-gray-300 rounded-md p-5 transition-opacity duration-500 shadow-sm bg-gray-50
+        ${animating ? "opacity-0" : "opacity-100"} flex flex-col items-center lg:items-stretch`}
+      style={{ minHeight: "300px" }} // Фіксована мінімальна висота для запобігання "стрибанню"
     >
       <div className="text-center font-semibold mb-4 text-lg text-[#265DAB] border-b pb-2 w-full">{region.name}</div>
 

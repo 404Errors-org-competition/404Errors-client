@@ -21,7 +21,7 @@ const BusinessForm = ({ onCalculate }) => {
 
         <Input
           type="text"
-          placeholder="Сума інвестицій, €"
+          placeholder="Сума інвестицій, $"
           className="w-[230px] sm:w-[280px] border-2 bg-white border-[#265DAB]"
         />
       </div>
