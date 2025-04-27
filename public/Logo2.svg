@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="100" viewBox="0 0 300 100" role="img" aria-labelledby="title">
+  <title id="title">SafeBiz Logo</title>
+  <!-- Shield icon -->
+  <polygon points="20,10 60,10 80,30 80,70 50,90 20,70" fill="#8FDADC"/>
+  <!-- Brand name -->
+  <text x="100" y="65" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="40" font-weight="bold">
+    SafeBiz
+  </text>
+</svg>

@@ -2,6 +2,10 @@ import React, { useMemo } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ProfitLossChart = ({ region }) => {
+  if (!region || region.alertsPercentage === undefined) {
+    return null;
+  }
+
   const chartOptions = useMemo(() => {
     return {
       chart: {

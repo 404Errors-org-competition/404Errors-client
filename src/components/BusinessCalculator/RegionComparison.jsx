@@ -304,6 +304,8 @@ const RegionComparison = ({ regions, selectedRegions }) => {
   }, [sortedRegions]);
 
   const radialChartOptions = useMemo(() => {
+    const maxPayback = Math.max(...sortedRegions.map((r) => r.paybackPeriodMonths));
+
     return {
       chart: {
         type: "radialBar",
@@ -334,8 +336,9 @@ const RegionComparison = ({ regions, selectedRegions }) => {
             value: {
               show: true,
               fontSize: "14px",
-              formatter: function (val) {
-                return Math.round(val / 5) + " міс";
+              formatter: function (val, opts) {
+                const regionIndex = opts.seriesIndex;
+                return sortedRegions[regionIndex].paybackPeriodMonths + " міс";
               },
             },
             total: {
